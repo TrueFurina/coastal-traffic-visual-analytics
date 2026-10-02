@@ -1,0 +1,33 @@
+# ---- dependencies (不可入库) ----
+node_modules/
+**/node_modules/
+
+# ---- python ----
+venv/
+**/venv/
+__pycache__/
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# ---- next / ts build ----
+.next/
+out/
+*.tsbuildinfo
+
+# ---- env & secrets ----
+.env
+.env.*
+!.env.example
+
+# ---- runtime ----
+logs/
+*.log
+
+# ---- os ----
+.DS_Store
+Thumbs.db
+
+# ---- 含个人/第三方身份信息的文档（不随公开仓发布；仓库仅保留脱敏提炼 md）----
+doc/*.doc
+doc/*.docx

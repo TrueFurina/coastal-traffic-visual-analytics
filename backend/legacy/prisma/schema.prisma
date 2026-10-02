@@ -1,0 +1,42 @@
+generator client {
+  provider        = "prisma-client-py"
+  recursive_type_depth = -1
+  // 解决Unicode编码问题
+  environment = ["PYTHONUTF8=1", "PYTHONIOENCODING=utf-8"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Ship {
+  id          Int          @id @default(autoincrement())
+  name        String
+  mmsi        String       @unique
+  imo         String?
+  ship_type   String?
+  length      Float?
+  width       Float?
+  draft       Float?
+  created_at  DateTime     @default(now())
+  updated_at  DateTime?    @updatedAt
+  tracks      ShipTrack[]
+}
+
+model ShipTrack {
+  id          Int         @id @default(autoincrement())
+  ship_id     Int
+  timestamp   DateTime
+  longitude   Float
+  latitude    Float
+  course      Float?
+  speed       Float?
+  heading     Float?
+  status      String?
+  ship        Ship        @relation(fields: [ship_id], references: [id], onDelete: Cascade)
+
+  @@index([ship_id])
+  @@index([timestamp])
+  @@index([ship_id, timestamp])
+}

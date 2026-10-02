@@ -1,0 +1,1048 @@
+/* 全局样式重置 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 基础样式定义 */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #FFFFFF;
+  background-color: #1D2129;
+  background-image: none;
+}
+
+/* 颜色变量定义 - 临时修改为透明背景方案 */
+:root {
+  --primary: #e05f1a;
+  --primary-light: #1D5D8E;
+  --primary-dark: #d3cd1e;
+  --success: #10B981;
+  --success-light: #34D399;
+  --warning: #F59E0B;
+  --warning-light: #FBBF24;
+  --danger: #EF4444;
+  --danger-light: #F87171;
+  --info: #B8D8E6;
+  --info-light: #D4E6F1;
+  --background: transparent;
+  --background-light: transparent;
+  --surface: transparent;
+  --surface-light: rgba(212, 230, 241, 0.8); /* 半透明浅灰蓝 */
+  --text-primary: #FFFFFF; /* 标题类文字 - 白色 */
+  --text-secondary: #E2E8F0; /* 常规关键信息文字 - 浅灰 */
+  --text-tertiary: #94A3B8; /* 辅助文字 - 中灰 */
+  --status-sailing-text: #34D399; /* 航行中状态文字 - 浅绿 */
+  --status-anchored-text: #FBBF24; /* 锚泊状态文字 - 浅黄 */
+  --border: #475569;
+  --border-light: #64748B;
+  --link-color: #60A5FA;
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--info-light);
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: var(--info);
+}
+
+/* 滚动条样式优化 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-tertiary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border);
+}
+
+/* 地图容器样式 */
+.ship-map-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* 船舶标记动画 */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* 船舶状态样式 - 增强区分度 */
+.ship-status-active {
+  background-color: var(--success);
+  border-color: var(--success-light);
+}
+
+.ship-status-anchored {
+  background-color: var(--warning);
+  border-color: var(--warning-light);
+}
+
+.ship-status-inactive {
+  background-color: var(--danger);
+  border-color: var(--danger-light);
+}
+
+.ship-status-unknown {
+  background-color: var(--text-tertiary);
+  border-color: var(--border-light);
+}
+
+.ship-item {
+  transition: all 0.2s ease;
+}
+
+.ship-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+  background-color: var(--surface-light);
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ship-marker.pulse {
+  animation: pulse 2s infinite;
+}
+
+/* 工具类 */
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
+.mt-3 {
+  margin-top: 0.75rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.mb-3 {
+  margin-bottom: 0.75rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.p-1 {
+  padding: 0.25rem;
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
+
+.p-3 {
+  padding: 0.75rem;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+.bg-surface {
+  background-color: var(--surface);
+}
+
+.bg-primary {
+  background-color: var(--primary);
+}
+
+.border {
+  border: 1px solid var(--border);
+}
+
+.border-primary {
+  border-color: var(--primary);
+}
+
+.rounded-md {
+  border-radius: 0.375rem;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.shadow-sm {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.shadow-md {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.15);
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.text-base {
+  font-size: 1rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-tertiary {
+  color: var(--text-tertiary);
+}
+
+.card {
+  background-color: var(--surface);
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.map-controls {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  z-index: 10;
+  background-color: var(--surface);
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  padding: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+.ship-info-panel {
+  background: linear-gradient(180deg, var(--surface) 0%, var(--surface-light) 100%);
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  padding: 1rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+  max-height: 70vh;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+}
+
+.panel-header {
+  background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  cursor: move;
+  user-select: none;
+}
+
+/* 船舶标记动画 */
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+  70% { box-shadow: 0 0 0 5px rgba(255, 255, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+}
+
+/* 地图控件样式 */
+.map-controls .maplibregl-ctrl {
+  background-color: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 4px !important;
+}
+
+.map-controls .maplibregl-ctrl button {
+  color: var(--text-primary) !important;
+}
+
+.map-controls .maplibregl-ctrl-scale {
+  color: var(--text-secondary) !important;
+}
+
+/* 弹窗样式 */
+.ship-popup .maplibregl-popup-content {
+  background-color: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 6px !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.text-gray-500 {
+  color: #6b7280;
+}
+
+.text-gray-600 {
+  color: #4b5563;
+}
+
+.text-gray-700 {
+  color: #374151;
+}
+
+.text-gray-800 {
+  color: #1f2937;
+}
+
+.text-gray-900 {
+  color: #111827;
+}
+
+.text-blue-600 {
+  color: #3b82f6;
+}
+
+.text-green-600 {
+  color: #10b981;
+}
+
+.text-yellow-600 {
+  color: #f59e0b;
+}
+
+.text-red-600 {
+  color: #ef4444;
+}
+
+.bg-blue-50 {
+  background-color: #eff6ff;
+}
+
+.bg-blue-100 {
+  background-color: #dbeafe;
+}
+
+.bg-blue-600 {
+  background-color: #3b82f6;
+}
+
+.bg-green-100 {
+  background-color: #d1fae5;
+}
+
+.bg-green-600 {
+  background-color: #10b981;
+}
+
+.bg-yellow-100 {
+  background-color: #fef3c7;
+}
+
+.bg-yellow-600 {
+  background-color: #f59e0b;
+}
+
+.bg-red-100 {
+  background-color: #fee2e2;
+}
+
+.bg-red-600 {
+  background-color: #ef4444;
+}
+
+.hover\:bg-blue-700:hover {
+  background-color: #2563eb;
+}
+
+.hover\:bg-green-700:hover {
+  background-color: #059669;
+}
+
+.hover\:bg-yellow-700:hover {
+  background-color: #d97706;
+}
+
+.hover\:bg-red-700:hover {
+  background-color: #dc2626;
+}
+
+.transition {
+  transition: all 0.2s ease;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
+}
+
+.h-screen {
+  height: 100vh;
+}
+
+.flex-1 {
+  flex: 1 1 0%;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.md\:w-80 {
+  width: 20rem;
+}
+
+.md\:flex-row {
+  flex-direction: row;
+}
+
+@media (min-width: 768px) {
+  .md\:flex-row {
+    flex-direction: row;
+  }
+
+  .md\:w-80 {
+    width: 20rem;
+  }
+}
+
+/* ===========================================================
+   Phase 3：可视分析工作台（浅色主题，deck.gl + 联动面板）
+   =========================================================== */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  color: #0f172a;
+  background-color: #eef2f7;
+}
+
+#__next {
+  height: 100%;
+}
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 18px;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.app-header h1 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.header-stats {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  background: #eef2ff;
+  color: #334155;
+  border: 1px solid #e0e7ff;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 12px;
+}
+
+.chip-danger {
+  background: #fee2e2;
+  color: #b91c1c;
+  border-color: #fecaca;
+}
+
+.banner-danger {
+  background: #fef2f2;
+  color: #b91c1c;
+  padding: 8px 16px;
+  font-size: 13px;
+  border-bottom: 1px solid #fecaca;
+}
+
+.banner-danger code {
+  background: #fff;
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+}
+
+.app-main {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr) 380px;
+  gap: 12px;
+  padding: 12px;
+}
+
+.col-left,
+.col-right {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.col-map {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.map-canvas {
+  flex: 1;
+  min-height: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #dbe3ec;
+  background: #dce7f2;
+}
+
+/* 区域框选：wrapper 承载选框与提示浮层 */
+.map-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+
+.map-draw-active {
+  cursor: crosshair;
+  user-select: none;
+}
+
+.map-draw-rect {
+  position: absolute;
+  border: 1.5px dashed #0f766e;
+  background: rgba(15, 118, 110, 0.1);
+  pointer-events: none;
+  border-radius: 2px;
+}
+
+.map-draw-hint {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.78);
+  color: #ffffff;
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.map-loading {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e8eef5;
+  color: #64748b;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  color: #0f172a;
+}
+
+.card-flex {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1;
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.muted {
+  color: #64748b;
+}
+
+.text-xs {
+  font-size: 11px;
+}
+
+.mt-6 {
+  margin-top: 6px;
+}
+
+.mt-8 {
+  margin-top: 8px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.gap-6 {
+  gap: 6px;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: #334155;
+}
+
+.field-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 6px;
+}
+
+.divider {
+  height: 1px;
+  background: #eef2f7;
+  margin: 10px 0;
+}
+
+.btn {
+  background: #f1f5f9;
+  color: #0f172a;
+  border: 1px solid #dbe3ec;
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 12px;
+}
+
+.btn:hover {
+  background: #e2e8f0;
+}
+
+.btn-primary {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background: #1d4ed8;
+}
+
+.btn-danger {
+  background: #dc2626;
+  border-color: #dc2626;
+  color: #ffffff;
+}
+
+.btn-danger:hover {
+  background: #b91c1c;
+}
+
+.btn-ghost {
+  background: transparent;
+}
+
+.btn-xs {
+  padding: 2px 8px;
+  font-size: 11px;
+}
+
+.input,
+.select {
+  border: 1px solid #dbe3ec;
+  border-radius: 6px;
+  padding: 4px 6px;
+  font-size: 12px;
+  background: #fff;
+  color: #0f172a;
+}
+
+.slider {
+  width: 100%;
+  accent-color: #2563eb;
+}
+
+.time-window-label {
+  font-size: 12px;
+  color: #0f172a;
+  background: #f8fafc;
+  border: 1px solid #eef2f7;
+  border-radius: 6px;
+  padding: 5px 8px;
+  margin: 6px 0;
+}
+
+.check-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #334155;
+  cursor: pointer;
+}
+
+.dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.seg-group {
+  display: flex;
+  gap: 4px;
+}
+
+.seg-btn {
+  flex: 1;
+  background: #f1f5f9;
+  border: 1px solid #dbe3ec;
+  color: #334155;
+  border-radius: 6px;
+  padding: 4px 6px;
+  font-size: 12px;
+}
+
+.seg-active {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid #eef2f7;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.tab {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #64748b;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 0;
+}
+
+.tab:hover {
+  background: transparent;
+  color: #0f172a;
+}
+
+.tab-active {
+  color: #2563eb;
+  border-bottom-color: #2563eb;
+  font-weight: 600;
+}
+
+.tab-body {
+  overflow-y: auto;
+  min-height: 0;
+  flex: 1;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.stat {
+  background: #f8fafc;
+  border: 1px solid #eef2f7;
+  border-radius: 8px;
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.stat span {
+  font-size: 11px;
+  color: #64748b;
+}
+
+.stat b {
+  font-size: 15px;
+  color: #0f172a;
+}
+
+.kv-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.kv {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #475569;
+}
+
+.chart-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+}
+
+.chart-bar-row {
+  display: grid;
+  grid-template-columns: 92px 1fr 44px;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+}
+
+.chart-bar-label {
+  color: #475569;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chart-bar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+  height: 12px;
+  overflow: hidden;
+}
+
+.chart-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+}
+
+.chart-bar-value {
+  text-align: right;
+  color: #334155;
+}
+
+.chart-rose {
+  display: block;
+}
+
+.chart-line {
+  width: 100%;
+}
+
+.chart-empty,
+.axis-labels {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.axis-labels {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rose-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.legend {
+  margin-top: 8px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend-title {
+  font-size: 11px;
+  color: #475569;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #475569;
+}
+
+.ramp {
+  display: inline-block;
+  width: 140px;
+  height: 10px;
+  border-radius: 5px;
+  background: linear-gradient(
+    90deg,
+    rgb(255, 255, 204),
+    rgb(255, 222, 145),
+    rgb(253, 180, 98),
+    rgb(247, 132, 60),
+    rgb(215, 48, 39)
+  );
+}
+
+.maplibregl-popup-content {
+  color: #0f172a;
+  font-size: 12px;
+}
+
+@media (max-width: 1280px) {
+  .app-main {
+    grid-template-columns: 280px minmax(0, 1fr) 320px;
+  }
+}
